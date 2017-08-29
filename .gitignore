@@ -1,22 +1,28 @@
-# Compiled class file
-*.class
-
-# Log file
+.idea/
+*.iml
+*.csv
+.DS_Store
+target/
+*.swp
+*.swo
 *.log
+logs/
+/target
+.project
+.vagrant
+.classpath
+.settings
+nccic_license.txt
+smssystem-*/*.iml
+smssystem-*/*.csv
+smssystem-*/.DS_Store
+smssystem-*/target/*
+smssystem-*/*.swp
+smssystem-*/target
+smssystem-*/.project
+smssystem-*/.classpath
+smssystem-*/.settings
+smssystem-*/*.log
+*.key
+sms_settings.properties
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
