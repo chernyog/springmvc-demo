@@ -3,27 +3,50 @@ package com.pintec.demo.controller;
 import com.pintec.demo.model.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Stream;
 
 @Controller
 public class DemoController extends BaseController {
 
     @RequestMapping(value = "/sayhello/{sb}", method = RequestMethod.GET)
-    public String sayHello(@PathVariable("sb") String sb, ModelMap map) {
+    public String sayHello(@PathVariable("sb") String sb, ModelMap map, @RequestParam String name) {
         print("hello " + sb);
+        print("name " + name);
         Person p = new Person();
         p.setId(new Random().nextInt(10000));
         p.setName("admin");
         p.setSex(new Random().nextBoolean());
         map.put("person", p);
         map.put("name", sb);
+        print(p.toString());
+        return "/demo";
+    }
+
+    @RequestMapping(value = "/sayhello", method = RequestMethod.GET)
+    public String sayHello(ModelMap map, @RequestParam String name) {
+        print("name " + name);
+        Person p = new Person();
+        p.setId(new Random().nextInt(10000));
+        p.setName(name);
+        p.setSex(new Random().nextBoolean());
+        map.put("person", p);
+        map.put("name", name);
+        print(p.toString());
+        return "/demo";
+    }
+
+    @RequestMapping(value = "/sayhello", method = RequestMethod.POST)
+    public String sayHello_(ModelMap map, @RequestBody String name) {
+        print("hello " + name);
+        Person p = new Person();
+        p.setId(new Random().nextInt(10000));
+        p.setName(name);
+        p.setSex(new Random().nextBoolean());
+        map.put("person", p);
+        map.put("name", name);
         print(p.toString());
         return "/demo";
     }
@@ -36,7 +59,6 @@ public class DemoController extends BaseController {
         Object[] filterList = dataArray.stream().filter(obj->obj.getId() == id).limit(1).toArray();
         if (filterList.length < 1) { return null; }
         return (Person) filterList[0];
-
 //        dataArray.forEach(($0) -> {
 //
 //        });

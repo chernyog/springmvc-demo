@@ -11,7 +11,7 @@
     <title>demo</title>
 </head>
 <body>
-<h3>hello ${requestScope.name}</h3>
+<h3>hello 张三 ${requestScope.name}</h3>
 <h3>${requestScope.person.toString()}</h3>
 </body>
 </html>

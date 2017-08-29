@@ -9,15 +9,37 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd"
 >
+    <!-- 自动注册 DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的。 -->
     <mvc:annotation-driven/>
 
+    <!-- 告诉 Spring 来扫描指定包下的类，并注册被 @Component，@Controller，@Service，@Repository等注解标记的组件。 -->
     <context:component-scan base-package="com.pintec.*"/>
     <!-- Jsp View Config Start-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这样设置后，控制器就可以直接访问 Views 目录下的 jsp 文件了 -->
         <property name="prefix" value="/Views/"/>
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
     </bean>
     <!-- Jsp View Config End-->
+
+    <!-- @ResponseBody 返回 json 格式数据 -->
+    <bean id="messageAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <!-- Support JSON -->
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="exceptionMessageAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <!-- Support JSON -->
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>
